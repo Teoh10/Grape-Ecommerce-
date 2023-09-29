@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import {Link} from "react-router-dom";
 import {ShoppingCart} from "phosphor-react";
 import "./navbar.css";
+import { ShopContext } from "../context/shop-context";
 
 
 function searchbar(){
@@ -16,6 +17,8 @@ function searchbar(){
       </form>)
 }
 export const Navbar = () => {
+    const {getAccBalance} = useContext(ShopContext);
+    var balance = getAccBalance();
     return (
     <div className="navbar">
         <div className="left-links">
@@ -23,6 +26,9 @@ export const Navbar = () => {
             {searchbar()}
         </div>
         <div className="right-links">
+        <button className="wallet-button" disabled>
+  <b>Wallet:</b> <span className="balance">{balance}</span>
+</button>
         <Link to="/sell"> Sell Item </Link>
             <Link to="/cart">
                 <ShoppingCart size={32} />

@@ -1,38 +1,56 @@
-import React, { useContext, useState } from "react";
-
+import React, { useContext, useState ,useEffect} from "react";
+import { PRODUCTS } from "../../product";
 import { ShopContext } from "../../context/shop-context";
+import "./sell.css"
 export const Sell = ()=> {
-    const {getProductList} = useContext(ShopContext);
+    // const {getProductList} = useContext(ShopContext);
     const[name,setName] = useState("");
     const[image,setImage] = useState("");
     const[price,setPrice] = useState(0);
+    const {addNewProduct} = useContext(ShopContext);
 
-    // const handleName = (e) => {
-    //     setName(e.target.value);
-    //   };
+    const [files, setFiles] = useState();
+    const [previews, setPreviews] = useState();
 
-    //   const handleImage = (e) => {
-    //     setImage(e.target.value);
-    //   };
+  // rendering previews
+  useEffect(() => {
+    if (!files) return;
+    var tmp=(URL.createObjectURL(files));;
 
-    //   const handlePrice = (e) => {
-    //     setPrice(e.target.value);
-    //   };
-
+    const objectUrls = tmp;
+    setPreviews(objectUrls);
+    // free memory
+    for (let i = 0; i < objectUrls.length; i++) {
+        return () => {
+          URL.revokeObjectURL(objectUrls[i]);
+        };
+      };
+    
+  }, [files]);
+    
     const handleSubmit = (e) => {
         e.preventDefault(); // Prevent the default form submission behavior
-    
+        console.log("handlerSubmit called");
+        const imageUrls = previews;
         // You can now access 'name' and 'email' state variables and perform actions
-        console.log("Name: ", name);
-        console.log("price: " ,price);
-    
+        const newItem ={
+            id:PRODUCTS.length+1,
+            productName: name,
+            price: price,
+            productImage: imageUrls,
+        }
+        console.log(newItem);
+        addNewProduct(newItem);
+        setName("");
+        setPreviews("");
+        setPrice(0);
         // Here, you can submit the form data to an API or perform other actions
       };
     return (
-        <div>
+        <div className="sell-container">
             <h3> Basic Information</h3>
-            <form onSubmit={(e)=>handleSubmit}>
-                <div>
+            <form onSubmit={(e)=>handleSubmit(e)}>
+                <div className="form-group">
                     <label htmlFor="name">Name:</label>
                         <input
                             type="text"
@@ -41,17 +59,19 @@ export const Sell = ()=> {
                              onChange={(e) => setName(e.target.value)}
                         />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="image">Image : </label>
                         <input
                             type="file"
                             id="image"
-                            value={image}
-                            onChange={(e) => setImage(e.target.value)}
+                            accept="image/jpg, image/jpeg, image/png"
+                            onChange={(e) => {if (e.target.files[0]) {
+                                                setFiles(e.target.files[0]);
+                            }}}
                             />
                 </div>
-                <div>
-                    <label htmlFor="price">Price : </label>
+                <div className="form-group">
+                    <label htmlFor="price">Price (SOL) : </label>
                         <input
                             type="number"
                             id="price"
@@ -59,41 +79,10 @@ export const Sell = ()=> {
                              onChange={(e)=> setPrice(e.target.value)}
                         />
                 </div>
-                <button type="submit">Submit</button>
+                <button type="submit" className="submit-button">Submit</button>
             </form>
+            {previews && <img src={previews} alt="Preview" className="preview-image"/>}
         </div>
-    //     <div>
-    //   <h1>Product Listing</h1>
-
-    //   {/* Product Input Form */}
-    //   <div>
-    //     <h2>Add a New Product</h2>
-    //     <input
-    //       type="text"
-    //       placeholder="Product Name"
-    //       value={productName}
-    //       onChange={(e) => setProductName(e.target.value)}
-    //     />
-    //     <input
-    //       type="number"
-    //       placeholder="Price"
-    //       value={productPrice}
-    //       onChange={(e) => setProductPrice(e.target.value)}
-    //     />
-    //     <textarea
-    //       placeholder="Product Description"
-    //       value={productDescription}
-    //       onChange={(e) => setProductDescription(e.target.value)}
-    //     />
-    //     <input
-    //       type="url"
-    //       placeholder="Image URL"
-    //       value={productImage}
-    //       onChange={(e) => setProductImage(e.target.value)}
-    //     />
-    //     <button onClick={handleAddProduct}>Add Product</button>
-    //   </div>
-    // </div>
     );
 };
 

@@ -24,7 +24,11 @@
   }
   
   .product img {
-    width: 300px;
+    max-width: 300px;
+
+ min-height: 300px;
+  width: auto;
+  height: auto;
   }
   
   .product .description {

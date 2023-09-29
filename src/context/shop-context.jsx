@@ -11,20 +11,29 @@ const getDefaultCart = ()=> {
     return cart;
 };
 export const ProductList = () =>{
-    const [productsList,setProducts] = useState(PRODUCTS);
-    return productsList;
+    const [productList,setProducts] = useState(PRODUCTS);
+    return productList;
 }
 
 export const ShopContextProvider = (props) => {
     const [cartItems,setCartItems] = useState(getDefaultCart());
 
-    const [productsList,setProducts] = useState(PRODUCTS);
-    
-    const getProductList = () => {
-        return productsList;
-    }
+    // const [productsList,addProducts] = useState(PRODUCTS);
+    const [balance,setBalance] = useState(100);
+    const getAccBalance = () => {
+        return balance;
+    };
+
+
+    const addNewProduct = (props) => {
+        PRODUCTS.push(props);
+        //add new index in the cartItems
+        const newCartItems = { ...cartItems, [props.id]: 0 };
+        setCartItems(newCartItems);
+    };
     const addToCart = (itemId) => {
         setCartItems((prev)=> ({...prev,[itemId]:prev[itemId] + 1}));
+
     };
 
     const removeFromCart = (itemId) => {
@@ -33,7 +42,7 @@ export const ShopContextProvider = (props) => {
 
     const updateCartItemCount = (newAmount,itemId) => {
         setCartItems((prev)=> ({...prev,[itemId]:newAmount}));
-    }
+    };
 
     const getTotalCartAmount = () => {
         let totalAmount = 0;
@@ -47,7 +56,7 @@ export const ShopContextProvider = (props) => {
         return totalAmount;
     }
 
-    const contextValue = {cartItems,addToCart,removeFromCart,updateCartItemCount, getTotalCartAmount,getProductList};
+    const contextValue = {cartItems,addToCart,removeFromCart,updateCartItemCount, getTotalCartAmount,addNewProduct,getAccBalance};
     console.log(cartItems);
     return (
     <ShopContext.Provider value={contextValue}>

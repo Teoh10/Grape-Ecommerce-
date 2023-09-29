@@ -10,7 +10,7 @@ export const Product = (props) => {
             <img src={productImage} />
             <div className="description">
                 <p><b>{productName}</b></p>
-                <p>${price}</p>
+                <p>{price} SOL</p>
             </div>
             <button className="addToCartBttn" onClick={()=>addToCart(id)}> Add To Cart {cartItemAmount>0 && <>({cartItemAmount})</>}</button>
         </div>

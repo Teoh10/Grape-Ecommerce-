@@ -4,20 +4,20 @@ import { ShopContext } from "../../context/shop-context";
 import { CartItem } from "./cart-item";
 import "./cart.css";
 import {useNavigate} from "react-router-dom";
-import { ProductList} from "../../context/shop-context";
+// import { ProductList} from "../../context/shop-context";
 
 export const Cart = ()=> {
     const {cartItems, getTotalCartAmount} = useContext(ShopContext);
     const totalAmount = getTotalCartAmount();
     const navigate = useNavigate();
-    const productList = ProductList();
+    // const productList = ProductList();
     return (
         <div className="cart">
             <div>
                 <h1> Your Cart Items</h1>
             </div>
             <div className="cartItems">
-                {productList.map((product) => {
+                {PRODUCTS.map((product) => {
                     if (cartItems[product.id] != 0){
                         return <CartItem data={product} />
                     }

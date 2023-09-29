@@ -44,8 +44,9 @@ a {
     background-color: rgba(255, 255, 255, 0.2);
     display: flex;
     align-items: center;
-    border-radius: 10px;
-    padding: 0 20px; /* Adjusted padding */
+    border-radius: 5px;
+    padding: 0; /* Adjusted padding */
+    padding-right: 5px;
     height: 40px; /* Adjusted height */
     max-width: 300px; /* Adjusted max-width */
     width: 100%; /* Adjusted width */
@@ -54,13 +55,16 @@ a {
   
   .search-bar input {
     background: transparent;
+    border-radius: 30px;
     flex: 1;
-    border: 0;
+    border: none;
     outline: none;
     padding: 0; /* Adjusted padding */
     font-size: 20px;
     color: white;
     opacity: 0.8;
+    box-sizing: border-box;
+    height:100%;
   }
   
   ::placeholder {
@@ -79,4 +83,25 @@ a {
     height: 40px; /* Adjusted height */
     background: transparent;
     cursor: pointer;
+  }
+
+  .wallet-button {
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove button border */
+    padding: 10px 20px; /* Adjust padding for spacing */
+    font-size: 16px; /* Button text font size */
+
+    border-radius: 20px;
+    /* Optional: Add hover styles */
+    transition: background-color 0.3s ease;
+  }
+  
+  .wallet-button:hover {
+    background-color: #0056b3; /* Change background color on hover */
+  }
+  
+  .balance {
+    font-weight: bold; /* Make balance text bold */
+    margin-left: 5px; /* Add spacing between "Wallet" and balance */
   }

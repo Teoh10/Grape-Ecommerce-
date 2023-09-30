@@ -4,6 +4,7 @@ import {Navbar} from "./components/navbar.jsx"
 import {Shop} from "./pages/shop/shop";
 import {Cart} from "./pages/cart/cart";
 import { Sell } from './pages/sell/sell.jsx';
+import {Payment} from "./pages/transaction/payment.jsx";
 import { ShopContextProvider } from './context/shop-context.jsx';
 
 // import {Login} from "./pages/login/login.jsx"
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<Shop />} />
           <Route path="/cart" element={<Cart />}/>
           <Route path="/sell" element={<Sell />}/>
+          <Route path="/payment" element={<Payment />}/>
           <Route path ="*" element={<h1> PAGE NOT FOUND </h1>}/>
         </Routes>
       </Router>

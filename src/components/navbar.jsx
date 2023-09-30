@@ -27,7 +27,7 @@ export const Navbar = () => {
         </div>
         <div className="right-links">
         <button className="wallet-button" disabled>
-  <b>Wallet:</b> <span className="balance">{balance}</span>
+  <b>Wallet:</b> <span className="balance">{balance}</span> SOL
 </button>
         <Link to="/sell"> Sell Item </Link>
             <Link to="/cart">

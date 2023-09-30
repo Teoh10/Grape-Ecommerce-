@@ -19,7 +19,7 @@ export const ShopContextProvider = (props) => {
     const [cartItems,setCartItems] = useState(getDefaultCart());
 
     // const [productsList,addProducts] = useState(PRODUCTS);
-    const [balance,setBalance] = useState(100);
+    const [balance,setBalance] = useState(9999);
     const getAccBalance = () => {
         return balance;
     };
